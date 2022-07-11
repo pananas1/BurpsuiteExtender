@@ -34,9 +34,6 @@ public class BurpExtender implements IBurpExtender, IHttpListener {
 
     }
 
-    // 针对响应 先判断是否是json格式数据 如果是  则去解析，分别判断一下key和value
-    // 如果不是json格式的数据  则直接用contains判断
-
     @Override
     public void processHttpMessage(int toolFlag, boolean messageIsRequest, IHttpRequestResponse messageInfo) {
         if (toolFlag == IBurpExtenderCallbacks.TOOL_PROXY) {
