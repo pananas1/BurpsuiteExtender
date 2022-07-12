@@ -1,4 +1,5 @@
 common\InitRulesTest.class
 utils\RegexUtilsTest.class
 common\RuleTest.class
+service\MessageServiceTest.class
 utils\FileUtilsTest.class

@@ -1,5 +1,6 @@
 common\Rules.class
 common\Rule.class
+common\RegexConfig.class
 ui\FindSenInfoUI.class
 utils\FileUtils.class
 utils\RegexUtils.class

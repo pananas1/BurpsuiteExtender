@@ -47,21 +47,21 @@ public class BurpExtender implements IBurpExtender, IHttpListener {
                 String requestBody = request.substring(bodyOffset); // 截取body部分，得到body
 
                 // 判断URL中是否包含敏感信息，如果包含，则高亮
-                if (MessageService.isSenInfoInUrl(requestMethod, requestUrl.toString())){
+                if (MessageService.isSenInfoInUrl(requestMethod, requestUrl.toString())) {
                     messageInfo.setHighlight("yellow");
                 }
 
                 // 判断POST请求中是否有csrf请求头，如果没有，则高亮
-                if ("POST".equals(requestMethod.toUpperCase())){
-                    for (String header:headers){
-                        if (!header.contains("csrf")&&!header.contains("xsrf")){
+                if ("POST".equals(requestMethod.toUpperCase())) {
+                    for (String header : headers) {
+                        if (!header.contains("csrf") && !header.contains("xsrf")) {
                             messageInfo.setHighlight("yellow");
                         }
                     }
                 }
 
                 // 判断请求体中是否有敏感信息，如果有，则高亮
-                if (MessageService.isSenInfoInBody(requestBody)){
+                if (MessageService.isSenInfoInBody(requestBody)) {
                     messageInfo.setHighlight("yellow");
                 }
 
@@ -72,8 +72,7 @@ public class BurpExtender implements IBurpExtender, IHttpListener {
                 IResponseInfo analyzeResponse = helpers.analyzeResponse(responseByte);
                 int bodyOffset = analyzeResponse.getBodyOffset();
                 String responseBody = responseStr.substring(bodyOffset);
-                // 判断响应体中是否有敏感信息，如果有，则高亮
-                if (MessageService.isSenInfoInBody(responseBody)){
+                if (MessageService.isSenInfoInBody(responseBody)) {
                     messageInfo.setHighlight("orange");
                 }
 

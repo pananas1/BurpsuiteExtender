@@ -2,6 +2,7 @@ package service;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import common.RegexConfig;
 import common.Rules;
 import utils.FileUtils;
 import utils.RegexUtils;
@@ -39,19 +40,18 @@ public class MessageService {
 
 
     public static boolean isSenInfoInBody(String body) {
-        boolean hasSenInfo = false;
-        try {
-            // 有问题
-            Map<String, Object> map = FileUtils.readJson("src/main/resources/config.json");
-            for (String key:map.keySet()){
-                String regex = map.get(key).toString();
-                hasSenInfo = isMatch(regex, body);
+        boolean hasSenInfo;
+        // 加载到burpsuite上时，读取文件会出异常，不知道原因，
+//            Map<String, Object> map = FileUtils.readJson("src/main/resources/config.json");
+        Map<String,Object> map = JSON.parseObject(RegexConfig.regexJson);
+        for (String key:map.keySet()){
+            String regex = map.get(key).toString();
+            hasSenInfo = isMatch(regex, body);
+            if (hasSenInfo){
+                return true;
             }
-        } catch (IOException e) {
-            e.printStackTrace();
         }
-
-        return hasSenInfo;
+        return false;
     }
 
 
