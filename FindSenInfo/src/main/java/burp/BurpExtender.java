@@ -1,10 +1,7 @@
 package burp;
 
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
-import common.ConstantUtils;
-import common.StringUtils;
+import utils.ConstantUtils;
 import service.MessageService;
 
 import java.io.PrintWriter;
@@ -21,6 +18,7 @@ public class BurpExtender implements IBurpExtender, IHttpListener {
 
     @Override
     public void registerExtenderCallbacks(IBurpExtenderCallbacks callbacks) {
+        // 初始化规则
         this.callbacks = callbacks;
         helpers = callbacks.getHelpers();
         stdout = new PrintWriter(callbacks.getStdout(), true);

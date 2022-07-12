@@ -1,0 +1,4 @@
+common\InitRulesTest.class
+utils\RegexUtilsTest.class
+common\RuleTest.class
+utils\FileUtilsTest.class
