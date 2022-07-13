@@ -4,11 +4,12 @@ package burp;
 import utils.ConstantUtils;
 import service.MessageService;
 
+import java.awt.*;
 import java.io.PrintWriter;
 import java.net.URL;
 import java.util.List;
 
-public class BurpExtender implements IBurpExtender, IHttpListener {
+public class BurpExtender implements IBurpExtender, IHttpListener, ITab {
 
     private IBurpExtenderCallbacks callbacks;
     private IExtensionHelpers helpers;
@@ -18,7 +19,6 @@ public class BurpExtender implements IBurpExtender, IHttpListener {
 
     @Override
     public void registerExtenderCallbacks(IBurpExtenderCallbacks callbacks) {
-        // 初始化规则
         this.callbacks = callbacks;
         helpers = callbacks.getHelpers();
         stdout = new PrintWriter(callbacks.getStdout(), true);
@@ -55,7 +55,7 @@ public class BurpExtender implements IBurpExtender, IHttpListener {
                 if ("POST".equals(requestMethod.toUpperCase())) {
                     for (String header : headers) {
                         if (!header.contains("csrf") && !header.contains("xsrf")) {
-                            messageInfo.setHighlight("yellow");
+                            messageInfo.setHighlight("red");
                         }
                     }
                 }
@@ -78,5 +78,15 @@ public class BurpExtender implements IBurpExtender, IHttpListener {
 
             }
         }
+    }
+
+    @Override
+    public String getTabCaption() {
+        return null;
+    }
+
+    @Override
+    public Component getUiComponent() {
+        return null;
     }
 }
