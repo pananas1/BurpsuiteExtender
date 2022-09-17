@@ -212,7 +212,7 @@ if (MessageService.isSenInfoInBody(responseBody)) {
 
 响应中包含敏感信息，记录被标记成橙色：
 
-![image-20220713221010664](img\image-20220713221010664.png)
+<img src="img\image-20220713221010664.png" alt="image-20220713221010664" style="zoom:50%;" />
 
 ## 3）总结
 
