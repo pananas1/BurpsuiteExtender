@@ -1,0 +1,38 @@
+rules:
+- rule:
+  - color: yellow
+    engine: nfa
+    loaded: false
+    name: Email
+    regex: (([a-zA-Z0-9][_|\.])*[a-zA-Z0-9]+@([a-zA-Z0-9][-|_|\.])*[a-zA-Z0-9]+\.((?!js|css|jpg|jpeg|png|ico)[a-zA-Z]{2,}))
+    scope: response
+    sensitive: false
+  - color: yellow
+    engine: dfa
+    loaded: false
+    name: WeCom Key
+    regex: ([c|C]or[p|P]id|[c|C]orp[s|S]ecret)
+    scope: any
+    sensitive: true
+  - color: green
+    engine: nfa
+    loaded: false
+    name: URL Redirect
+    regex: ([\?|&](redirect|reference|return|refix|readﬁle|redirect_to|redirect_url|returnto|register|returnurl|redirecturi|redir|returl|redirecturl|redirect_uri|redirect_url)=.*)
+    scope: any
+    sensitive: false
+  - color: green
+    engine: nfa
+    loaded: false
+    name: File
+    regex: ([\?|&]((filename=)|(filepath=)|(inputfile=)|(readﬁle=)|(download=)|(file=))(.*))
+    scope: any
+    sensitive: false
+  - color: pink
+    engine: nfa
+    loaded: false
+    name: JWT
+    regex: (ey[A-Za-z0-9_\/+-]*\.[A-Za-z0-9._\/+-]*)
+    scope: any
+    sensitive: false
+  type: Basic Information
