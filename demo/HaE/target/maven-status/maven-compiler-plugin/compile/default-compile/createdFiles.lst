@@ -36,4 +36,5 @@ burp\Config.class
 burp\ui\Databoard.class
 burp\ui\RulePane$1.class
 burp\ui\MainUI.class
+burp\csv\entity\Record.class
 burp\ui\TabTitleEditListener$3.class

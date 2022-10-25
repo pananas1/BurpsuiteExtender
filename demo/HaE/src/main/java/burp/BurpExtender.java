@@ -1,15 +1,14 @@
 package burp;
 
 import burp.action.*;
+import burp.csv.entity.Record;
 import burp.ui.MainUI;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 import javax.swing.*;
 import java.awt.*;
 import java.nio.charset.StandardCharsets;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.List;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
@@ -27,6 +26,8 @@ public class BurpExtender implements IBurpExtender, IHttpListener, IMessageEdito
     GetColorKey gck = new GetColorKey();
     UpgradeColor uc = new UpgradeColor();
     ProcessMessage pm = new ProcessMessage();
+    public static Record record = new Record();
+
 
     @Override
     public void registerExtenderCallbacks(final IBurpExtenderCallbacks callbacks)
@@ -84,6 +85,7 @@ public class BurpExtender implements IBurpExtender, IHttpListener, IMessageEdito
             }
             // 获取请求主机信息
             assert iHttpService != null;
+            // Host
             String host = iHttpService.getHost();
 
             String c = new String(content, StandardCharsets.UTF_8).intern();
@@ -104,8 +106,17 @@ public class BurpExtender implements IBurpExtender, IHttpListener, IMessageEdito
                 messageInfo.setHighlight(color);
                 String addComment = String.join(", ", result.get(1).get("comment"));
                 String resComment = originalComment != null ? String.format("%s, %s", originalComment, addComment) : addComment;
-
+                // Comment:resComment
                 messageInfo.setComment(resComment);
+                record.setHost(host);
+                record.setComment(resComment);
+                record.setRecord(false);
+                String requestTest = (new String(messageInfo.getRequest(), StandardCharsets.UTF_8).intern());
+                record.setRequest(new String(messageInfo.getRequest(), StandardCharsets.UTF_8).intern());
+                record.setResponse(new String(messageInfo.getResponse(), StandardCharsets.UTF_8).intern());
+
+                System.out.println(requestTest);
+                System.out.println(record.getResponse());
             }
         }
     }
